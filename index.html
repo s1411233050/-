@@ -500,6 +500,18 @@
                 <button id="btn-restart-quiz" onclick="restartQuiz()" class="ios-tactile-btn w-full py-3 rounded-xl border border-black/10 dark:border-white/15 bg-white/50 dark:bg-white/5 text-[10px] font-bold text-[#49454f] dark:text-[#cac4d0] mt-2 flex items-center justify-center gap-1.5 shadow-sm">
                     <span>重新進行心理拔河測驗 ➔</span>
                 </button>
+
+                <!-- -->
+                <!-- 版權與免責聲明資訊區 -->
+                <div class="mt-6 pt-4 border-t border-black/5 dark:border-white/5 flex flex-col items-center space-y-2 select-none shrink-0 pb-2">
+                    <button onclick="openDisclaimerModal()" class="ios-tactile-btn text-[9px] text-[#6750a4] dark:text-[#d0bcff] hover:underline font-bold bg-transparent border-0 py-1 px-3">
+                        📋 版權與免責聲明
+                    </button>
+                    <div class="text-center text-[8px] text-slate-400 dark:text-slate-500 font-medium leading-normal">
+                        © 2026《被「點亮」的焦慮》測驗製作人. All Rights Reserved.<br>
+                        Made with ❤️ to help people build healthier digital habits.
+                    </div>
+                </div>
             </div>
 
         </main>
@@ -590,6 +602,31 @@
                         諮詢
                     </button>
                 </div>
+            </div>
+        </div>
+
+        <!-- -->
+        <!-- 📋 版權與免責聲明 互動彈窗 -->
+        <div id="disclaimer-modal" class="absolute inset-0 bg-black/40 dark:bg-black/60 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 z-50 flex items-center justify-center p-6">
+            <div class="bg-white/95 dark:bg-[#121016]/95 backdrop-blur-2xl w-full max-w-sm rounded-[24px] p-5 shadow-2xl border border-white/20 dark:border-white/10 transform scale-90 transition-all duration-300 flex flex-col max-h-[80vh]" id="disclaimer-modal-card">
+                <div class="flex justify-between items-center mb-3 select-none shrink-0 border-b border-black/5 dark:border-white/5 pb-2">
+                    <h3 class="text-xs font-black text-[#6750a4] dark:text-[#d0bcff]">📋 版權與免責聲明</h3>
+                    <button onclick="closeDisclaimerModal()" class="p-1.5 rounded-full hover:bg-black/5 dark:hover:bg-white/10">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                </div>
+                <!-- 聲明可捲動內容 -->
+                <div class="overflow-y-auto no-scrollbar space-y-3 text-[10px] text-slate-600 dark:text-slate-300 leading-relaxed font-medium text-left pr-1 flex-grow">
+                    <p class="font-bold text-slate-800 dark:text-slate-100">Copyright © 2026《被「點亮」的焦慮》測驗製作人. All rights reserved.</p>
+                    <p>本平台內容、測驗設計、視覺介面、動畫、AI 互動流程及相關素材，未經授權不得重製、修改、散布或作其他商業用途。</p>
+                    <p>本測驗僅供自我覺察、教育推廣及學術研究參考，不作為心理健康、醫療或臨床診斷依據。</p>
+                    <p>AI 手機退癮生活導航所提供之建議係依據測驗結果與使用者對話內容所產生，僅供一般生活改善參考，不具醫療、心理治療或專業諮商效力。</p>
+                    <p>若您因手機使用、心理健康、焦慮、憂鬱、成癮或其他身心狀況而長期感到困擾，建議尋求心理師、精神科醫師或其他相關專業人員協助。</p>
+                    <p>為提供更具連續性的互動體驗，AI 僅於本次測驗期間參考本次對話內容，不代表永久保存或記憶您的個人資料（若網站另有資料儲存機制，應依隱私權政策辦理）。</p>
+                </div>
+                <button onclick="closeDisclaimerModal()" class="ios-tactile-btn w-full mt-4 py-2.5 rounded-xl bg-black dark:bg-white text-white dark:text-black font-extrabold text-xs select-none shrink-0">
+                    我已閱讀並同意
+                </button>
             </div>
         </div>
 
@@ -1809,6 +1846,29 @@
                 const miniBox = document.getElementById("chat-history");
                 miniBox.scrollTop = miniBox.scrollHeight;
             }, 50);
+        }
+
+        /* */
+        function openDisclaimerModal() {
+            const modal = document.getElementById("disclaimer-modal");
+            const card = document.getElementById("disclaimer-modal-card");
+            if (!modal || !card) return;
+            modal.classList.remove("opacity-0", "pointer-events-none");
+            modal.classList.add("opacity-100", "pointer-events-auto");
+            card.classList.remove("scale-90");
+            card.classList.add("scale-100");
+            triggerHaptic();
+        }
+
+        function closeDisclaimerModal() {
+            const modal = document.getElementById("disclaimer-modal");
+            const card = document.getElementById("disclaimer-modal-card");
+            if (!modal || !card) return;
+            modal.classList.remove("opacity-100", "pointer-events-auto");
+            modal.classList.add("opacity-0", "pointer-events-none");
+            card.classList.remove("scale-100");
+            card.classList.add("scale-90");
+            triggerHaptic();
         }
 
         function restartQuiz() {
